@@ -1,0 +1,48 @@
+<div class="container">
+    <h1>Modifier le produit</h1>
+  
+    <div *ngIf="errorMessage" class="error-message">
+      <mat-icon color="warn">error</mat-icon> {{ errorMessage }}
+    </div>
+  
+    <form [formGroup]="productForm" (ngSubmit)="onSubmit()">
+      <mat-form-field appearance="outline">
+        <mat-label>Nom</mat-label>
+        <input matInput formControlName="name" placeholder="Nom du produit" />
+        <mat-error *ngIf="productForm.get('name')?.hasError('required')">Le nom est requis</mat-error>
+      </mat-form-field>
+  
+      <mat-form-field appearance="outline">
+        <mat-label>Description</mat-label>
+        <input matInput formControlName="description" placeholder="Description du produit" />
+        <mat-error *ngIf="productForm.get('description')?.hasError('required')">La description est requise</mat-error>
+      </mat-form-field>
+  
+      <mat-form-field appearance="outline">
+        <mat-label>Prix</mat-label>
+        <input matInput type="number" formControlName="price" placeholder="Prix" />
+        <mat-error *ngIf="productForm.get('price')?.hasError('required')">Le prix est requis</mat-error>
+        <mat-error *ngIf="productForm.get('price')?.hasError('min')">Le prix doit être supérieur ou égal à 0</mat-error>
+      </mat-form-field>
+  
+      <mat-form-field appearance="outline">
+        <mat-label>Quantité en stock</mat-label>
+        <input matInput type="number" formControlName="unitInStock" placeholder="Quantité" />
+        <mat-error *ngIf="productForm.get('unitInStock')?.hasError('required')">La quantité en stock est requise</mat-error>
+        <mat-error *ngIf="productForm.get('unitInStock')?.hasError('min')">La quantité doit être supérieure ou égale à 0</mat-error>
+      </mat-form-field>
+  
+      <mat-form-field appearance="outline">
+        <mat-label>Poids</mat-label>
+        <input matInput type="number" formControlName="weight" placeholder="Poids" />
+        <mat-error *ngIf="productForm.get('weight')?.hasError('required')">Le poids est requis</mat-error>
+        <mat-error *ngIf="productForm.get('weight')?.hasError('min')">Le poids doit être supérieur ou égal à 0</mat-error>
+      </mat-form-field>
+  
+      <div class="actions">
+        <button mat-raised-button color="primary" type="submit" [disabled]="productForm.invalid">Enregistrer</button>
+        <button mat-raised-button color="warn" routerLink="/product">Annuler</button>
+      </div>
+    </form>
+  </div>
+  
